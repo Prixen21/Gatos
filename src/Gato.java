@@ -4,6 +4,8 @@ public class Gato {
     private String color;
     private double peso;
 
+    private boolean hambre;
+
     Gato(String nombre){
         this.nombre = nombre;
     }
@@ -23,13 +25,28 @@ public class Gato {
 
          if(!this.estado){
              System.out.println( this.nombre + " ya esta muerto dejalo :(");
-             return;
          }
-         else if(Math.random()>0.2){
+         else if(Math.random()>0.7){
             System.out.println(this.nombre + " ha muerto :(");
             this.estado = false;
         }else {
             System.out.println(this.nombre + " ha sobrevivido :)");
+        }
+    }
+
+    public void AlimentaGato(){
+        if(!this.estado){
+            System.out.println(  "No puedes alimentar a "+ this.nombre + ", esta muerto :(");
+        }
+
+        else if(!this.hambre){
+            System.out.println( this.nombre + " ya no tiene hambre");
+            this.peso += 1;
+            this.hambre = true;
+
+        }else {
+            System.out.println(this.nombre + " ha muerto por obesidad");
+            this.estado = false;
         }
     }
 
@@ -45,8 +62,9 @@ public class Gato {
     public void setColor(String color){
         this.color = color;
     }
-    public boolean getEstado(){
-        return this.estado;
+    public String getEstado(){
+        if(this.estado)return "Vivo";
+        else return "Muerto";
     }
     public void setEstado(boolean estado){
         this.estado = estado;
@@ -56,6 +74,14 @@ public class Gato {
     }
     public void setPeso(double peso) {
         this.peso = peso;
+    }
+    public String  getHambre(){
+        if(!this.estado)  return "esta muerto";
+        if(!this.hambre ) return  "Hambriento";
+        else return  "Alimentado";
+    }
+    public void setHambre(boolean hambre){
+        this.hambre = hambre;
     }
 }
 
